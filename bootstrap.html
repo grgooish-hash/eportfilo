@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootstrap — CET138 ePortfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+
+  <nav class="top-nav" aria-label="Site navigation">
+    <div>
+      <p class="brand">Nishma Ghale</p>
+      <p class="brand-sub">CET138 · Full Stack Development</p>
+    </div>
+    <div class="top-nav-links">
+      <a href="index.html">Home</a>
+      <a href="fullstack.html">Full Stack</a>
+      <a href="html.html">HTML</a>
+      <a href="css.html">CSS</a>
+      <a class="active" href="bootstrap.html">Bootstrap</a>
+      <a href="javascript.html">JavaScript</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-head">
+      <h1>Bootstrap Framework</h1>
+      <p class="lede">Bootstrap is a front-end framework that provides a 12-column responsive
+      grid, a large library of pre-styled components (navbars, cards, modals, forms, alerts),
+      and JavaScript plugins for interactive widgets — all driven by simple HTML classes.</p>
+    </div>
+
+    <div class="intro-block">
+      <h2>What this demonstrates</h2>
+      <p>The demo below is a small project showcase page built using only Bootstrap 5 classes —
+      no custom layout CSS was written. It combines a responsive navbar, a 12-column grid of
+      cards, form controls, alerts, a progress bar, and a modal dialog triggered without writing
+      any JavaScript.</p>
+
+     <div class="demo-frame">
+    <div class="frame-label">Live Demo</div>
+
+    <div style="padding:20px;">
+
+        <button class="btn btn-primary">Primary Button</button>
+        <button class="btn btn-success">Success Button</button>
+
+        <div class="card mt-3" style="width:18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Bootstrap Card</h5>
+                <p class="card-text">
+                    This is a Bootstrap card component.
+                </p>
+                <a href="#" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+
+        <div class="alert alert-warning mt-3">
+            This is a Bootstrap alert.
+        </div>
+
+    </div>
+</div>
+       target="_blank" rel="noopener">
+       Open demo in new tab
+    </a>
+</p>
+
+<a class="btn" href="bootstrap-showcase.html"
+   target="_blank" rel="noopener">
+   Open demo in new tab
+</a>
+      <h2>1. The 12-column grid</h2>
+      <p>Bootstrap's grid divides each row into 12 columns. <code>col-md-4</code> means "take 4 of
+      12 columns (one third) on medium screens and up, but stack full-width on smaller screens" —
+      this is how the three project cards become a single column on mobile automatically:</p>
+
+<pre><code>&lt;div class="row g-3"&gt;
+  &lt;div class="col-12 col-md-4"&gt;...card 1...&lt;/div&gt;
+  &lt;div class="col-12 col-md-4"&gt;...card 2...&lt;/div&gt;
+  &lt;div class="col-12 col-md-4"&gt;...card 3...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <h2>2. Components: navbar and cards</h2>
+      <p>The navbar uses <code>navbar-expand-lg</code> so it collapses into a hamburger menu below
+      the "large" breakpoint, with <code>navbar-toggler</code> handling the toggle. Each project is
+      a <code>card</code> with a <code>badge</code> for its category and Bootstrap's button
+      classes (<code>btn btn-outline-dark</code>):</p>
+
+<pre><code>&lt;div class="card shadow-sm"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;span class="badge text-bg-warning"&gt;Frontend&lt;/span&gt;
+    &lt;h5 class="card-title"&gt;Weather App&lt;/h5&gt;
+    &lt;p class="card-text small text-muted"&gt;...&lt;/p&gt;
+    &lt;button class="btn btn-outline-dark btn-sm"&gt;View details&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <h2>3. JavaScript plugins via data attributes</h2>
+      <p>The "View details" buttons open a modal dialog. This requires Bootstrap's bundled
+      JavaScript, but no custom script — the behaviour is wired up declaratively with
+      <code>data-bs-*</code> attributes:</p>
+
+<pre><code>&lt;button data-bs-toggle="modal" data-bs-target="#projectModal"&gt;
+  View details
+&lt;/button&gt;
+
+&lt;div class="modal fade" id="projectModal"&gt;...&lt;/div&gt;</code></pre>
+
+      <h2>4. Utility classes</h2>
+      <p>Spacing, colour, and text utilities (<code>mb-3</code>, <code>text-muted</code>,
+      <code>shadow-sm</code>, <code>bg-dark</code>) let small visual adjustments be made directly
+      in markup, without writing additional CSS rules.</p>
+
+      <h2>Bootstrap vs. hand-written CSS</h2>
+      <p>The previous section showed CSS written from scratch — full control, but every layout
+      and component had to be designed and coded. Bootstrap trades some of that control for
+      speed and consistency: a responsive grid, accessible components, and common patterns are
+      available immediately as classes. In practice, full stack developers often use Bootstrap
+      (or a similar framework) for structure and components, then layer custom CSS — as in
+      Section 02 — on top for branding.</p>
+    </div>
+  </main>
+
+</div>
+</body>
+</html>

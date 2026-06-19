@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is Full Stack Development? — CET138 ePortfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+
+  <nav class="top-nav" aria-label="Site navigation">
+    <div>
+      <p class="brand">Nishma Ghale</p>
+      <p class="brand-sub">CET138 · Full Stack Development</p>
+    </div>
+    <div class="top-nav-links">
+      <a href="index.html">Home</a>
+      <a class="active" href="fullstack.html">Full Stack</a>
+      <a href="html.html">HTML</a>
+      <a href="css.html">CSS</a>
+      <a href="bootstrap.html">Bootstrap</a>
+      <a href="javascript.html">JavaScript</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-head">
+      <h1>What is Full Stack Development?</h1>
+      <p class="lede">A full stack developer works across every layer of a web application — from the markup
+      and styling a user sees, through to the logic that runs in their browser, the server that
+      processes requests, and the database that stores everything in between.</p>
+    </div>
+
+    <div class="intro-block">
+      <h2>The two halves of a web app</h2>
+      <p>Every dynamic website is really two applications talking to each other. The <strong>front
+      end</strong> is everything that runs inside the user's browser: the HTML that gives the page
+      its structure, the CSS that controls how it looks, and the JavaScript that makes it respond to
+      clicks, typing, and other events. The <strong>back end</strong> runs on a server somewhere else
+      entirely — it receives requests from the front end, talks to a database, applies business
+      logic, and sends data back, usually as JSON.</p>
+
+      <p>A full stack developer is comfortable moving between both halves. They might spend the
+      morning building a registration form in HTML and styling it with Bootstrap, then spend the
+      afternoon writing the server-side code (in something like Node.js, PHP, or Python) that checks
+      whether the email address already exists in the database before saving the new account.</p>
+
+      <h2>The layers of this portfolio</h2>
+      <p>This ePortfolio is organised as a stack, shown in the sidebar. Each layer builds on the one
+      before it:</p>
+
+      <ul class="spec-list">
+        <li><strong>HTML</strong> — the skeleton. Defines what elements exist on the page and what
+        they mean (a heading, a list, a form, a link).</li>
+        <li><strong>CSS</strong> — the skin. Controls colour, spacing, layout, typography, and
+        responsiveness without changing the underlying content.</li>
+        <li><strong>Bootstrap</strong> — a CSS and JavaScript framework that provides a pre-built grid
+        system, components, and utility classes, so common UI patterns (navbars, cards, modals,
+        forms) can be assembled quickly and consistently.</li>
+        <li><strong>JavaScript</strong> — the behaviour. Listens for events (clicks, form
+        submissions, page loads) and updates the page dynamically without a full reload — this is
+        what turns a static document into an interactive application.</li>
+      </ul>
+
+      <h2>Front end vs. back end vs. full stack</h2>
+      <div class="demo-grid">
+        <div class="card">
+          <h3>Front End</h3>
+          <p style="max-width:none;">Runs in the browser. Concerned with what the user sees and
+          interacts with — layout, styling, forms, animations, client-side validation.</p>
+          <div class="tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span><span class="tag">Bootstrap</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Back End</h3>
+          <p style="max-width:none;">Runs on a server. Handles requests, authentication, business
+          logic, and reads/writes data to a database (e.g. MySQL, MongoDB).</p>
+          <div class="tags">
+            <span class="tag">Node.js</span><span class="tag">PHP</span><span class="tag">SQL</span><span class="tag">APIs</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Full Stack</h3>
+          <p style="max-width:none;">Understands and can build both halves, and — critically — how
+          they communicate, typically via HTTP requests and JSON responses.</p>
+          <div class="tags">
+            <span class="tag">Front End</span><span class="tag">+</span><span class="tag">Back End</span><span class="tag">+</span><span class="tag">Database</span>
+          </div>
+        </div>
+      </div>
+
+      <h2>Worked example: a request from click to response</h2>
+      <p>To make this concrete, consider a "Sign Up" button on a website. The diagram below traces
+      what happens across the stack when a user submits the form.</p>
+
+      <div class="demo-frame">
+    <div class="frame-label">Diagram · request/response lifecycle</div>
+
+    <div style="padding:20px; border:1px solid #ccc; border-radius:12px; background:#f9f9f9;">
+        <p><strong>1.</strong> User fills in the Sign Up form</p>
+        <p><strong>2.</strong> JavaScript validates the form</p>
+        <p><strong>3.</strong> Browser sends request to the server</p>
+        <p><strong>4.</strong> Server checks database</p>
+        <p><strong>5.</strong> Server sends response back</p>
+        <p><strong>6.</strong> Page updates without reloading</p>
+    </div>
+</div>
+
+      </div>
+
+      <ol style="font-family:var(--font-mono); font-size:0.85rem; color:var(--ink-soft); max-width:38em; line-height:2;">
+        <li>The user fills in the HTML form and clicks <strong>Sign Up</strong>.</li>
+        <li>JavaScript intercepts the click, runs client-side validation, and sends the data to the
+        server using <code>fetch()</code>.</li>
+        <li>The server (back end) receives the request, checks the database for an existing
+        account, and creates a new record.</li>
+        <li>The server sends a JSON response back (success or error).</li>
+        <li>JavaScript receives the response and updates the page — e.g. showing a "Welcome!"
+        message — without reloading.</li>
+      </ol>
+
+      <h2>Why this matters for this portfolio</h2>
+      <p>Each of the next four sections demonstrates one layer of this stack in isolation, with a
+      working, interactive example you can try directly in the browser, plus an explanation of the
+      code and concepts behind it. By the end, the portfolio itself is a small demonstration of full
+      stack thinking: structured content (HTML), styled consistently (CSS and Bootstrap), and made
+      interactive (JavaScript) — all working together as one application.</p>
+    </div>
+  </main>
+
+</div>
+</body>
+</html>

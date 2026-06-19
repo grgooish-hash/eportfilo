@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript — CET138 ePortfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+
+  <nav class="top-nav" aria-label="Site navigation">
+    <div>
+      <p class="brand">Nishma Ghale</p>
+      <p class="brand-sub">CET138 · Full Stack Development</p>
+    </div>
+    <div class="top-nav-links">
+      <a href="index.html">Home</a>
+      <a href="fullstack.html">Full Stack</a>
+      <a href="html.html">HTML</a>
+      <a href="css.html">CSS</a>
+      <a href="bootstrap.html">Bootstrap</a>
+      <a class="active" href="javascript.html">JavaScript</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-head">
+      <h1>JavaScript</h1>
+      <p class="lede">JavaScript is the only programming language that runs natively in every
+      browser. It responds to user events, reads and updates the DOM (Document Object Model) in
+      real time, and can communicate with servers in the background using
+      <code>fetch()</code> — without reloading the page.</p>
+    </div>
+
+    <div class="intro-block">
+      <h2>What this demonstrates</h2>
+      <p>The demo below contains two parts. The first is a to-do list built entirely with
+      JavaScript: adding, completing, and removing tasks all update the DOM dynamically. The
+      second sends a real <code>fetch()</code> request to a public API and displays the JSON
+      response, demonstrating asynchronous JavaScript with <code>async</code>/<code>await</code>
+      and error handling.</p>
+
+      <div class="demo-frame">
+    <div class="frame-label">Live Demo</div>
+
+    <div style="padding:20px;">
+        <input type="text" id="taskInput" placeholder="Enter task">
+        <button onclick="addTask()">Add Task</button>
+
+        <ul id="taskList"></ul>
+    </div>
+</div>
+
+      <p><a class="btn" href="./javascript-tasks.html" target="_blank" rel="noopener">Open demo in new tab ↗</a></p>
+
+      <h2>1. Selecting and creating elements</h2>
+      <p>JavaScript selects existing elements with <code>document.getElementById</code>, and
+      creates new ones with <code>document.createElement</code>. Each task in the list is built as
+      an <code>&lt;li&gt;</code> containing a <code>&lt;span&gt;</code> and a remove
+      <code>&lt;button&gt;</code>, then appended to the list:</p>
+
+<pre><code>const li = document.createElement('li');
+const span = document.createElement('span');
+span.textContent = task.text;
+
+const delBtn = document.createElement('button');
+delBtn.textContent = 'Remove';
+
+li.append(span, delBtn);
+taskList.appendChild(li);</code></pre>
+
+      <h2>2. Handling events</h2>
+      <p>Event listeners connect user actions to functions. The example below adds a task either
+      by clicking a button or pressing Enter — two different events triggering the same
+      function:</p>
+
+<pre><code>addBtn.addEventListener('click', addTask);
+
+taskInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') addTask();
+});</code></pre>
+
+      <p>Clicking a task's text toggles a <code>done</code> property on its data object and
+      re-renders the list — this is the core pattern of "state drives the DOM": JavaScript keeps
+      the source of truth in a plain array (<code>tasks</code>), and the visible list is
+      regenerated from it every time something changes.</p>
+
+      <h2>3. Asynchronous JavaScript with fetch</h2>
+      <p>The second part of the demo sends a network request and waits for the response using
+      <code>async</code>/<code>await</code>, wrapped in a <code>try...catch</code> so the page
+      doesn't break if the request fails:</p>
+
+<pre><code>fetchBtn.addEventListener('click', async () => {
+  fetchOutput.textContent = 'Loading…';
+  try {
+    const res = await fetch('https://dummyjson.com/quotes/random');
+    const data = await res.json();
+    fetchOutput.textContent = JSON.stringify(data, null, 2);
+  } catch (err) {
+    fetchOutput.textContent = 'Could not reach the network…';
+  }
+});</code></pre>
+
+      <p>This is exactly the mechanism described in Section 00's request lifecycle diagram: the
+      browser sends a request, a server responds with JSON, and JavaScript updates the page with
+      the result — no full page reload required.</p>
+
+      <h2>Bringing the stack together</h2>
+      <p>This portfolio itself demonstrates the stack in practice: semantic <strong>HTML</strong>
+      provides the structure for every page, a shared <strong>CSS</strong> file
+      (<code>assets/css/style.css</code>) styles all five sections consistently, the
+      <strong>Bootstrap</strong> section shows how a framework accelerates common UI patterns, and
+      <strong>JavaScript</strong> — as shown here — adds the interactivity that turns static
+      content into a usable application. Connecting this front end to a real back end and
+      database would complete the full stack.</p>
+    </div>
+  </main>
+
+</div>
+</body>
+</html>

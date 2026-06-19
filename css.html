@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS — CET138 ePortfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+
+  <nav class="top-nav" aria-label="Site navigation">
+    <div>
+      <p class="brand">Nishma Ghale</p>
+      <p class="brand-sub">CET138 · Full Stack Development</p>
+    </div>
+    <div class="top-nav-links">
+      <a href="index.html">Home</a>
+      <a href="fullstack.html">Full Stack</a>
+      <a href="html.html">HTML</a>
+      <a class="active" href="css.html">CSS</a>
+      <a href="bootstrap.html">Bootstrap</a>
+      <a href="javascript.html">JavaScript</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-head">
+      <h1>CSS</h1>
+      <p class="lede">CSS (Cascading Style Sheets) separates how a page looks from what it
+      contains. The same HTML can be restyled completely just by changing a stylesheet —
+      this is the principle of "separation of concerns."</p>
+    </div>
+
+    <div class="intro-block">
+      <h2>What this demonstrates</h2>
+      <p>The demo below is a small dashboard of cards that shows five CSS techniques working
+      together: Flexbox for the toolbar, CSS Grid for the responsive card layout, custom
+      properties (variables) for theming, transitions for hover effects, and a keyframe
+      animation. A single button toggles between light and dark themes by switching one
+      attribute — every colour updates instantly because they're all driven by variables.</p>
+
+     <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; padding:16px;">
+  <div style="padding:16px; border:1px solid #ddd; border-radius:12px; background:#fff;">Card 1</div>
+  <div style="padding:16px; border:1px solid #ddd; border-radius:12px; background:#fff;">Card 2</div>
+  <div style="padding:16px; border:1px solid #ddd; border-radius:12px; background:#fff;">Card 3</div>
+</div>
+
+      <p><a class="btn" href="demos/css-cards.html" target="_blank" rel="noopener">Open demo in new tab ↗</a></p>
+
+      <h2>1. Custom properties for theming</h2>
+      <p>Colours are declared once as variables on <code>:root</code>, then reused everywhere via
+      <code>var(--name)</code>. A second set of values is declared for
+      <code>[data-theme="dark"]</code> — switching the attribute swaps every colour at once:</p>
+
+<pre><code>:root{
+  --bg:#F7F5F0; --fg:#1A2332; --card:#fff; --accent:#E8A33D;
+}
+[data-theme="dark"]{
+  --bg:#1A2332; --fg:#F7F5F0; --card:#2D3344;
+}
+body{ background:var(--bg); color:var(--fg); }</code></pre>
+
+      <h2>2. Responsive grid with auto-fit</h2>
+      <p>The card grid doesn't use media queries to define column counts. Instead,
+      <code>repeat(auto-fit, minmax(190px, 1fr))</code> lets the browser fit as many 190px-minimum
+      columns as will floor, stretching them to fill any remaining space:</p>
+
+<pre><code>.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap:1rem;
+}</code></pre>
+
+      <h2>3. Transitions and keyframe animation</h2>
+      <p>Hovering a card animates its position and shadow smoothly because <code>transition</code>
+      tells the browser to interpolate property changes over time, rather than jumping instantly:</p>
+
+<pre><code>.card{
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px -12px rgba(0,0,0,0.25);
+}</code></pre>
+
+      <p>The pulsing dot uses a <code>@keyframes</code> rule that scales and fades the element in a
+      loop:</p>
+
+<pre><code>@keyframes pulse{
+  0%, 100% { transform: scale(1);   opacity: 1;   }
+  50%      { transform: scale(1.5); opacity: 0.4; }
+}
+.pulse{ animation: pulse 1.8s ease-in-out infinite; }</code></pre>
+
+      <h2>4. Respecting user preferences</h2>
+      <p>Not everyone wants moving interfaces. A <code>prefers-reduced-motion</code> media query
+      disables all transitions and animations for users who have requested this at the operating
+      system level:</p>
+
+<pre><code>@media (prefers-reduced-motion: reduce){
+  * { animation: none !important; transition: none !important; }
+}</code></pre>
+
+      <h2>Why this matters</h2>
+      <p>This demo shows that CSS is far more than colour and font choices — it handles layout
+      (Flexbox, Grid), interaction feedback (transitions), motion (animations), theming (custom
+      properties), and accessibility (reduced motion), all without a single line of JavaScript
+      beyond the one-line theme toggle. This separation is what allows the Bootstrap framework,
+      covered next, to provide an entire design system through CSS classes alone.</p>
+    </div>
+  </main>
+
+</div>
+</body>
+</html>

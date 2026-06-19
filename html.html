@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML — CET138 ePortfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+
+  <nav class="top-nav" aria-label="Site navigation">
+    <div>
+      <p class="brand">Nishma Ghale</p>
+      <p class="brand-sub">CET138 · Full Stack Development</p>
+    </div>
+    <div class="top-nav-links">
+      <a href="index.html">Home</a>
+      <a href="fullstack.html">Full Stack</a>
+      <a class="active" href="html.html">HTML</a>
+      <a href="css.html">CSS</a>
+      <a href="bootstrap.html">Bootstrap</a>
+      <a href="javascript.html">JavaScript</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-head">
+      <h1>HTML</h1>
+      <p class="lede">HTML (HyperText Markup Language) describes the structure and meaning of
+      content — not how it looks. Semantic elements tell the browser, search engines, and
+      assistive technologies what each part of a page <em>is</em>: a navigation menu, an article,
+      a table of data, a form.</p>
+    </div>
+
+    <div class="intro-block">
+      <h2>What this demonstrates</h2>
+      <p>The example below is a single, self-contained HTML page for a recipe. It deliberately
+      uses a wide range of semantic and structural elements rather than generic
+      <code>&lt;div&gt;</code>s for everything, so that the document's structure is meaningful on
+      its own — even before any CSS is applied.</p>
+
+      <div style="padding:20px; border:1px solid #ddd; border-radius:12px; background:#f9f9f9;">
+  <h3>Simple Recipe</h3>
+  <p><strong>Ingredients</strong></p>
+  <ul>
+    <li>Flour</li>
+    <li>Eggs</li>
+    <li>Milk</li>
+  </ul>
+  <p><strong>Steps</strong></p>
+  <ol>
+    <li>Mix</li>
+    <li>Bake</li>
+    <li>Serve</li>
+  </ol>
+</div>
+
+      <p><a class="btn" href="demos/html-recipe.html" target="_blank" rel="noopener">Open demo in new tab ↗</a></p>
+
+      <h2>Elements used, and why</h2>
+      <ul class="spec-list">
+        <li><code>&lt;header&gt;</code> — groups the page title and introductory navigation.</li>
+        <li><code>&lt;nav&gt;</code> — wraps the in-page links, with <code>aria-label</code> for
+        screen readers.</li>
+        <li><code>&lt;main&gt;</code> — the single block of primary content for the page.</li>
+        <li><code>&lt;section&gt;</code> — groups related content (ingredients, method, nutrition),
+        each with its own heading referenced via <code>aria-labelledby</code>.</li>
+        <li><code>&lt;figure&gt;</code> / <code>&lt;figcaption&gt;</code> — associates an image
+        with its caption as a single unit.</li>
+        <li><code>&lt;table&gt;</code>, <code>&lt;caption&gt;</code>, <code>&lt;thead&gt;</code>,
+        <code>&lt;th scope="row|col"&gt;</code> — a properly labelled data table, so a screen
+        reader can announce "Calories: 410 kcal" correctly.</li>
+        <li><code>&lt;details&gt;</code> / <code>&lt;summary&gt;</code> — a native, JavaScript-free
+        disclosure widget for optional content.</li>
+        <li><code>&lt;mark&gt;</code> — highlights text with semantic meaning (here, an optional
+        ingredient).</li>
+        <li><code>&lt;footer&gt;</code> — closes off the page with metadata.</li>
+      </ul>
+
+      <h2>Code excerpt</h2>
+      <p>This snippet shows the nutrition table — note the use of <code>scope</code> attributes,
+      which let assistive technology correctly associate each cell with its row and column
+      heading:</p>
+
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Approximate values&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th scope="col"&gt;Nutrient&lt;/th&gt;&lt;th scope="col"&gt;Amount&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope="row"&gt;Calories&lt;/th&gt;&lt;td&gt;410 kcal&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope="row"&gt;Protein&lt;/th&gt;&lt;td&gt;9 g&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+
+      <h2>Why semantics matter</h2>
+      <p>Two pages can look identical once styled, but a page built from meaningful elements is
+      easier to navigate with a keyboard or screen reader, ranks better in search engines, and is
+      easier for other developers to read and maintain. Semantic HTML is the foundation the rest
+      of the stack — CSS, Bootstrap, and JavaScript — builds on: CSS styles these elements, and
+      JavaScript selects and manipulates them by their structure.</p>
+    </div>
+  </main>
+
+</div>
+</body>
+</html>

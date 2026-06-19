@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nishma Ghale — CET138 ePortfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── Tokens ───────────────────────────────────────────── */
+  :root {
+    --ink:       #1A2332;
+    --ink-soft:  #5A6478;
+    --ink-xs:    #8D97A8;
+    --paper:     #F7F5F0;
+    --paper-alt: #EDEAE3;
+    --surface:   #590505;
+    --border:    #6b0ee5;
+    --accent:    #3B6FE0;
+    --accent-w:  #E8A33D;
+    --code-bg:   #0f5ce2;
+    --code-fg:   #A8D8B0;
+
+    /* layer identity colours, reused from the stack diagram below */
+    --c-html: #E87A3B;
+    --c-css:  #2EAADC;
+    --c-bs:   #7952B3;
+    --c-js:   #C9A227;
+
+    --font-d: 'Space Grotesk', system-ui, sans-serif;
+    --font-b: 'Source Serif 4', Georgia, serif;
+    --font-m: 'IBM Plex Mono', monospace;
+
+    --ease: cubic-bezier(.4,0,.2,1);
+  }
+
+  /* Dark reading mode — applies to everything below the hero,
+     which keeps its own permanent dark band regardless of toggle. */
+  body[data-theme="dark"] {
+    --paper:     #11151D;
+    --paper-alt: #161C28;
+    --surface:   #1C2330;
+    --border:    #2B3243;
+    --ink:       #956dc7;
+    --ink-soft:  #124bd2;
+    --ink-xs:    #a017ce;
+  }
+
+  /* ── Reset ────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body { font-family: var(--font-b); background: var(--paper); color: var(--ink); line-height: 1.75; transition: background 250ms var(--ease), color 250ms var(--ease); }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
+  /* ── Hero ─────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    background: var(--ink);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(59,111,224,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,111,224,0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+
+  /* ── Hero nav ─────────────────────────────────────────── */
+  .hero-nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .hero-brand {
+    font-family: var(--font-d);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #fff;
+  }
+
+  .hero-nav-right { display: flex; align-items: center; gap: 1rem; }
+
+  .hero-nav-badge {
+    font-family: var(--font-m);
+    font-size: 0.72rem;
+    color: var(--accent-w);
+    border: 1px solid rgba(232,163,61,0.35);
+    padding: 0.25em 0.75em;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .theme-toggle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 150ms var(--ease), transform 150ms var(--ease);
+  }
+  .theme-toggle:hover { background: rgba(255,255,255,0.14); }
+  .theme-toggle:active { transform: scale(0.92); }
+  .theme-toggle svg { width: 16px; height: 16px; }
+  .icon-sun { display: none; }
+  body[data-theme="dark"] .icon-sun { display: block; }
+  body[data-theme="dark"] .icon-moon { display: none; }
+
+  /* ── Hero content ─────────────────────────────────────── */
+  .hero-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 3rem 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-m);
+    font-size: 0.78rem;
+    color: var(--accent-w);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-h1 {
+    font-family: var(--font-d);
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .hero-typed-line {
+    font-family: var(--font-d);
+    font-size: clamp(1.25rem, 3vw, 1.8rem);
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 1.75rem;
+    min-height: 1.6em;
+  }
+  .hero-typed-line .accent { color: var(--accent-w); }
+  .typed-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: var(--accent-w);
+    margin-left: 3px;
+    transform: translateY(2px);
+    animation: blink 0.9s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255,255,255,0.55);
+    max-width: 52ch;
+    margin: 0 auto 2.5rem;
+    line-height: 1.65;
+  }
+
+  .hero-ctas { display: flex; align-items: center; justify-content: center; gap: 1.25rem; flex-wrap: wrap; }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-d);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+    background: #fff;
+    padding: 0.8em 2em;
+    border-radius: 6px;
+    transition: background 200ms var(--ease), transform 200ms var(--ease);
+  }
+  .hero-cta:hover { background: #e8f0ff; transform: translateY(-2px); }
+  .hero-cta svg { flex-shrink: 0; }
+
+  .hero-cta-ghost {
+    font-family: var(--font-d);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.65);
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    padding-bottom: 2px;
+    transition: color 150ms var(--ease), border-color 150ms var(--ease);
+  }
+  .hero-cta-ghost:hover { color: #fff; border-color: #fff; }
+
+  /* ── Stack preview strip ──────────────────────────────── */
+  .hero-strip {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+
+  .strip-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 1.2rem 1rem;
+    border-right: 1px solid rgba(255,255,255,0.07);
+    font-family: var(--font-d);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.45);
+    transition: background 200ms var(--ease), color 200ms var(--ease);
+  }
+  .strip-item:last-child { border-right: none; }
+  .strip-item:hover { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.85); }
+
+  /* ── Sections ─────────────────────────────────────────── */
+  section { padding: 5rem 2rem; }
+
+  .section-inner { max-width: 900px; margin: 0 auto; }
+
+  .section-label {
+    font-family: var(--font-m);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-h2 {
+    font-family: var(--font-d);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .section-p {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin-bottom: 3rem;
+    line-height: 1.7;
+  }
+
+  /* ── Stack tower (signature interactive element) ─────────── */
+  .stack-wrap { margin-bottom: 3rem; }
+
+  .stack-tower {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: 14px 14px 0 0;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .stack-layer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.4rem 1.75rem;
+    border-left: 4px solid var(--layer-color);
+    background: var(--layer-tint);
+    text-decoration: none;
+    color: inherit;
+    transition: background 200ms var(--ease), border-left-width 200ms var(--ease), opacity 200ms var(--ease);
+  }
+  .stack-layer + .stack-layer { border-top: 1px solid var(--border); }
+
+  .stack-tower:hover .stack-layer:not(:hover) { opacity: 0.55; }
+
+  .stack-layer:hover {
+    background: var(--layer-tint-hover);
+    border-left-width: 9px;
+  }
+
+  .layer-meta { display: flex; align-items: baseline; gap: 0.75rem; min-width: 11rem; flex-shrink: 0; }
+
+  .layer-z {
+    font-family: var(--font-m);
+    font-size: 0.7rem;
+    color: var(--layer-color);
+    letter-spacing: 0.03em;
+  }
+
+  .layer-title {
+    font-family: var(--font-d);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .layer-desc {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    flex: 1;
+    max-width: 38ch;
+  }
+
+  .layer-arrow {
+    font-family: var(--font-d);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--layer-color);
+    flex-shrink: 0;
+    transition: transform 200ms var(--ease);
+  }
+  .stack-layer:hover .layer-arrow { transform: translateX(4px); }
+
+  .stack-plinth {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--ink);
+    color: #fff;
+    padding: 1.1rem 1.75rem;
+    border-radius: 0 0 14px 14px;
+    text-decoration: none;
+    transition: background 200ms var(--ease);
+  }
+  .stack-plinth:hover { background: #232C40; }
+  .stack-plinth .plinth-label {
+    font-family: var(--font-d);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .stack-plinth .plinth-note {
+    font-family: var(--font-m);
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.55);
+  }
+
+  /* ── Stats row ────────────────────────────────────────── */
+  .stats-row {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: var(--font-d);
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-family: var(--font-m);
+    font-size: 0.72rem;
+    color: var(--ink-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.4rem;
+  }
+
+  /* ── About section ────────────────────────────────────── */
+  .about-section { background: var(--paper-alt); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .avatar-mono {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-w));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-d);
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-visual {
+    background: var(--code-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    font-family: var(--font-m);
+    font-size: 0.82rem;
+    line-height: 2;
+    color: var(--code-fg);
+    overflow: hidden;
+  }
+
+  .code-comment { color: #5A6478; }
+  .code-key     { color: #79B8FF; }
+  .code-str     { color: var(--accent-w); }
+
+  .skills-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .skill-pill {
+    font-family: var(--font-m);
+    font-size: 0.72rem;
+    padding: 0.3em 0.75em;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--ink-soft);
+    background: var(--surface);
+  }
+
+  .contact-line {
+    margin-top: 1.75rem;
+    font-family: var(--font-m);
+    font-size: 0.85rem;
+  }
+  .contact-line a { color: var(--accent); border-bottom: 1px solid rgba(59,111,224,0.35); }
+  .contact-line a:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ── Footer ───────────────────────────────────────────── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    padding: 2rem;
+    font-family: var(--font-m);
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Animations ───────────────────────────────────────── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── Responsive ───────────────────────────────────────── */
+  @media (max-width: 720px) {
+    .hero-nav   { padding: 1.25rem 1.5rem; }
+    .hero-content { padding: 3rem 1.5rem 2rem; }
+    .strip-item { font-size: 0.7rem; padding: 1rem 0.5rem; }
+    section     { padding: 3.5rem 1.25rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .stack-layer { flex-wrap: wrap; }
+    .layer-desc { max-width: none; }
+    .stats-row { gap: 1.75rem; }
+  }
+
+  @media (max-width: 480px) {
+    .strip-item span:not(.strip-num) { display: none; }
+    .layer-meta { min-width: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .hero-cta, .stack-layer, .layer-arrow, .theme-toggle, .typed-cursor {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+
+  <nav class="hero-nav">
+    <p class="hero-brand">Nishma Ghale</p>
+    <div class="hero-nav-right">
+      <span class="hero-nav-badge">CET138 · Full Stack Development</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark reading mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 12.6A9 9 0 1 1 11.4 3a7.2 7.2 0 0 0 9.6 9.6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">CET138 · Web Development</p>
+    <h1 class="hero-h1">Hi, I'm Nishma Ghale.</h1>
+    <p class="hero-typed-line" aria-hidden="true">I'm learning to build <span class="accent" id="heroTyped"></span><span class="typed-cursor"></span></p>
+    <span class="sr-only">I'm learning to build semantic HTML, responsive CSS, Bootstrap interfaces, and interactive JavaScript.</span>
+    <p class="hero-sub">
+      This is my CET138 ePortfolio — a hands-on look at how I'm picking up full stack
+      development, one layer at a time. Every section below has a live demo you can try,
+      plus the code and reasoning behind it.
+    </p>
+    <div class="hero-ctas">
+      <a class="hero-cta" href="#stack">
+        See the stack
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a class="hero-cta-ghost" href="fullstack.html">Read the full overview →</a>
+    </div>
+  </div>
+
+  <div class="hero-strip" role="list" aria-label="Portfolio sections">
+    <a class="strip-item" href="fullstack.html" role="listitem"><span>Full Stack</span></a>
+    <a class="strip-item" href="html.html" role="listitem"><span>HTML</span></a>
+    <a class="strip-item" href="css.html" role="listitem"><span>CSS</span></a>
+    <a class="strip-item" href="bootstrap.html" role="listitem"><span>Bootstrap</span></a>
+    <a class="strip-item" href="javascript.html" role="listitem"><span>JavaScript</span></a>
+  </div>
+
+</section>
+
+<!-- ═══════════════════ STACK SECTION ═══════════════════ -->
+<section id="stack">
+  <div class="section-inner">
+    <p class="section-label fade-up">How it's organised</p>
+    <h2 class="section-h2 fade-up">One stack, four layers</h2>
+    <p class="section-p fade-up">Each layer below builds on the one beneath it — CSS depends on HTML existing, JavaScript depends on the DOM both create. Hover a layer to focus on it, or click through to its live demo and code.</p>
+
+    <div class="stack-wrap fade-up">
+      <div class="stack-tower">
+        <a class="stack-layer" href="javascript.html" style="--layer-color:var(--c-js); --layer-tint:rgba(201,162,39,0.07); --layer-tint-hover:rgba(201,162,39,0.16);">
+          <div class="layer-meta"><span class="layer-z">z·3</span><span class="layer-title">JavaScript</span></div>
+          <p class="layer-desc">Events, state, and fetch() calls — the layer that makes pages respond.</p>
+          <span class="layer-arrow">View →</span>
+        </a>
+        <a class="stack-layer" href="bootstrap.html" style="--layer-color:var(--c-bs); --layer-tint:rgba(121,82,179,0.07); --layer-tint-hover:rgba(121,82,179,0.16);">
+          <div class="layer-meta"><span class="layer-z">z·2</span><span class="layer-title">Bootstrap</span></div>
+          <p class="layer-desc">A 12-column grid and ready-made components, for assembling UI fast.</p>
+          <span class="layer-arrow">View →</span>
+        </a>
+        <a class="stack-layer" href="css.html" style="--layer-color:var(--c-css); --layer-tint:rgba(46,170,220,0.07); --layer-tint-hover:rgba(46,170,220,0.16);">
+          <div class="layer-meta"><span class="layer-z">z·1</span><span class="layer-title">CSS</span></div>
+          <p class="layer-desc">Layout, colour, and motion — the rules that decide how everything looks.</p>
+          <span class="layer-arrow">View →</span>
+        </a>
+        <a class="stack-layer" href="html.html" style="--layer-color:var(--c-html); --layer-tint:rgba(232,122,59,0.07); --layer-tint-hover:rgba(232,122,59,0.16);">
+          <div class="layer-meta"><span class="layer-z">z·0</span><span class="layer-title">HTML</span></div>
+          <p class="layer-desc">Headings, forms, semantic structure — the markup everything else builds on.</p>
+          <span class="layer-arrow">View →</span>
+        </a>
+      </div>
+      <a class="stack-plinth" href="fullstack.html">
+        <span class="plinth-label">Full Stack Development</span>
+        <span class="plinth-note">how the layers connect →</span>
+      </a>
+    </div>
+
+    <div class="stats-row fade-up" id="statsRow">
+      <div><span class="stat-num" data-count="6">0</span><span class="stat-label">Pages built</span></div>
+      <div><span class="stat-num" data-count="4">0</span><span class="stat-label">Core technologies</span></div>
+      <div><span class="stat-num" data-count="100" data-suffix="%">0</span><span class="stat-label">Hand-coded</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ABOUT ═══════════════════ -->
+<section class="about-section">
+  <div class="section-inner">
+    <div class="about-grid">
+
+      <div>
+        <div class="avatar-mono fade-up" aria-hidden="true">NG</div>
+        <p class="section-label fade-up">About me</p>
+        <h2 class="section-h2 fade-up">A bit about Nishma</h2>
+        <p class="section-p fade-up" style="margin-bottom:1.5rem;">
+          I'm Nishma Ghale, a CET138 student building this ePortfolio to show — not just tell —
+          how the pieces of the front end stack fit together. Every demo on this site is
+          something I wrote, broke, and fixed myself.
+        </p>
+        <div class="skills-row fade-up">
+          <span class="skill-pill">HTML5</span>
+          <span class="skill-pill">CSS3</span>
+          <span class="skill-pill">Bootstrap 5</span>
+          <span class="skill-pill">Vanilla JS</span>
+          <span class="skill-pill">Flexbox</span>
+          <span class="skill-pill">CSS Grid</span>
+          <span class="skill-pill">fetch() API</span>
+          <span class="skill-pill">Accessibility</span>
+        </div>
+        <p class="contact-line fade-up">→ <a href="mailto:your-email@example.com">your-email@example.com</a></p>
+      </div>
+
+      <div class="about-visual fade-up" aria-hidden="true">
+        <div><span class="code-comment">// request lifecycle</span></div>
+        <div><span class="code-key">async function</span> signUp(data) {</div>
+        <div>&nbsp;&nbsp;<span class="code-key">const</span> res = <span class="code-key">await</span> fetch(</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-str">'/api/users'</span>, {</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method: <span class="code-str">'POST'</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body: JSON.stringify(data)</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+        <div>&nbsp;&nbsp;);</div>
+        <div>&nbsp;&nbsp;<span class="code-key">const</span> json = <span class="code-key">await</span> res.json();</div>
+        <div>&nbsp;&nbsp;<span class="code-key">return</span> json; <span class="code-comment">// ← back end responds</span></div>
+        <div>}</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <p>Built by Nishma Ghale &nbsp;·&nbsp; CET138 Full Stack Development ePortfolio</p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Scroll-reveal */
+  var els = document.querySelectorAll('.fade-up');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  } else {
+    els.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* Theme toggle — light/dark for everything below the hero */
+  var body = document.body;
+  var toggleBtn = document.getElementById('themeToggle');
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    body.setAttribute('data-theme', 'dark');
+  }
+  toggleBtn.addEventListener('click', function () {
+    var isDark = body.getAttribute('data-theme') === 'dark';
+    body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  });
+
+  /* Typewriter hero line */
+  var typedEl = document.getElementById('heroTyped');
+  var phrases = [
+    'semantic HTML.',
+    'responsive CSS.',
+    'interfaces with Bootstrap.',
+    'interactive JavaScript.',
+    'a complete web stack.'
+  ];
+
+  if (reduceMotion) {
+    typedEl.textContent = phrases[phrases.length - 1];
+  } else {
+    var p = 0, c = 0, deleting = false;
+
+    function tick() {
+      var word = phrases[p];
+      if (!deleting) {
+        c++;
+        typedEl.textContent = word.slice(0, c);
+        if (c === word.length) {
+          deleting = true;
+          setTimeout(tick, 1400);
+          return;
+        }
+        setTimeout(tick, 55);
+      } else {
+        c--;
+        typedEl.textContent = word.slice(0, c);
+        if (c === 0) {
+          deleting = false;
+          p = (p + 1) % phrases.length;
+          setTimeout(tick, 300);
+          return;
+        }
+        setTimeout(tick, 28);
+      }
+    }
+    tick();
+  }
+
+  /* Count-up stats */
+  var statsRow = document.getElementById('statsRow');
+  function animateCounters() {
+    document.querySelectorAll('.stat-num').forEach(function (el) {
+      var target = parseInt(el.getAttribute('data-count'), 10);
+      var suffix = el.getAttribute('data-suffix') || '';
+      if (reduceMotion) { el.textContent = target + suffix; return; }
+      var start = 0;
+      var duration = 900;
+      var startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        el.textContent = Math.round(start + (target - start) * progress) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  if (statsRow && 'IntersectionObserver' in window) {
+    var statsIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { animateCounters(); statsIo.unobserve(e.target); }
+      });
+    }, { threshold: 0.4 });
+    statsIo.observe(statsRow);
+  } else if (statsRow) {
+    animateCounters();
+  }
+})();
+</script>
+
+</body>
+</html>
